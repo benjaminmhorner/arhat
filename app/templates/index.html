@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<head><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}"></head>    
+<div class='content-section'>
+  <form method="POST" action='' enctype="multipart/form-data">
+  <fieldset class='form-group'>
+      <legend class="border-bottom mb-4"><h1>{{_('Bubbles')}}</h1></legend>
+      <div class="form-group">
+          {{form.triggers[0].shaving.label(class="form-control-label")}}
+          {{form.triggers[0].shaving(class="form-control form-control-lg",  value=current_user.shaving)}}
+        </div>
+
+        <div class="form-group">
+
+            {{form.triggers[0].submit(class="btn btn-outline-info")}}
+          </div>
+         
+      {% if Friends|count > 0 %}
+      
+      <legend class="border-bottom mb-4"><h1>{{_('Thresholds')}}</h1></legend>
+      {% set ns = namespace(i=0) %}
+      {% for field in form.triggers %}
+      {{ form.hidden_tag() }}
+      <img class='rounded-circle article-img' src="{{ url_for('static', filename='profile_pics/'+Friends[ns.i].image_file) }}">
+      <label for="customRange1">{{_('When would you like')}} {{Friends[ns.i].username}} {{_('to be contacted?')}}</label>
+    
+      {% set ns.i = ns.i + 1 %}
+      
+      <div class="form-group">
+          {{field.friend(class="form-control form-control-lg", type="hidden")}}
+        </div>
+        <div class="form-group">
+          {{field.t_hold(class="form-control form-control-lg")}}
+        </div>
+      <div class="form-group">
+
+          {{field.submit(class="btn btn-outline-info")}}
+        </div>
+    
+      {% endfor %}
+
+    </fieldset>
+  </form>
+
+  {%else%}
+  <legend class="border-bottom mb-4">{{_('Make some friends bitch')}}</legend>
+  {% endif %}
+</div>
+  
+
+
+{% endblock content %}

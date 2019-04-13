@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div class="content-section">
+    <form method="POST" action='' enctype="multipart/form-data">
+      {{ form.hidden_tag() }}
+      <fieldset class='form-group'>
+        <legend class="border-bottom mb-4"><h1>{{ _('Send a message to %(recipient)s', recipient=recipient) }}</h1></legend>
+        <div class="form-group">
+            {{ form.message(class="form-control form-control-lg") }}
+          </div>
+            <div class="form-group">{{ form.submit(class="btn btn-outline-info")}}
+    </div>
+  </fieldset>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class='content-section'>
+      <form method="POST" action='' enctype="multipart/form-data">
+        <fieldset class='form-group'>
+            <legend class="border-bottom mb-4"><h1>{{_('To Do')}}</h1></legend>
+              <div class="form-group">
+                {{form.new_todo[0].text(class="form-control form-control-lg", value="Enter your to do item here", onfocus="if (this.value=='Enter your to do item here') this.value='';")}}
+              </div>
+              <div class="form-group">
+                {{form.new_todo[0].date_due(class="form-control form-control-lg")}}
+              </div>
+              <div class="form-group">
+                {{form.new_todo[0].submit(class="btn btn-outline-info", value="Submit new to do")}}
+              </div>
+              {% set ns = namespace(i=0) %}
+        {% for todo in todos %}
+        <p class="article-content">{{todo.text}}</p>
+        <p class="article-content">{{todo.date_due}}</p>
+        {{form.todos[ns.i].iden(value=todo.id, type="hidden")}}
+        {{form.todos[ns.i].text(type="hidden")}}
+        <p class="article-content">{{form.todos[ns.i].complete(type="radio")}} {{_('Done?')}}</p>
+        {% set ns.i=ns.i + 1 %}
+        {% endfor %}
+        {% if ns.i > 0 %}
+        {{form.todos[0].submit(class="btn btn-outline-danger", value="Done")}}
+        {% endif %}
+        </fieldset>
+      
+
+    
+  </form>
+{% endblock content %}

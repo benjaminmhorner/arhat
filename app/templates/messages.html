@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-section">
+
+        <legend class="border-bottom mb-4"><h1>{{ _('Inbox') }}</h1></legend>  
+    {% for post in messages %}
+
+    
+        <div class="content-section">
+                <img class='rounded-circle article-img' src="{{ url_for('static', filename='profile_pics/'+post.author.image_file) }}">
+        <p>sender: {{post.author.username}}</p>
+      <p>message: {{post.body}}</p>
+      <p>at: {{moment(post.timestamp).format('LLL')}}</p> 
+    </div> 
+    {% endfor %}
+    <legend class="border-bottom mb-4"><h1>{{ _('Sent') }}</h1></legend>  
+    {% for post in sent %}
+    
+        <div class="content-section">
+        <img class='rounded-circle article-img' src="{{ url_for('static', filename='profile_pics/'+post.recipient.image_file) }}">
+    <p>recipient: {{post.recipient.username}}</p>
+      <p>message: {{post.body}}</p>
+      <p>at: {{moment(post.timestamp).format('LLL')}}</p>
+    </div> 
+    {% endfor %}
+    
+
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> {{ _('Newer messages') }}
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    {{ _('Older messages') }} <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>  
+{% endblock %}
+<a class="btn   btn btn-secondary  mb-4" href="{{ url_for('main.friends', page=page_num) }}"></a>
