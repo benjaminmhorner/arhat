@@ -29,7 +29,7 @@ def before_request():
       current_user.last_seen = datetime.utcnow()
       db.session.commit()
       g.user = current_user
-      g.search_form = SearchForm()
+      #g.search_form = SearchForm()
       todos = Todo.query.filter_by(user_id=current_user.id)
       total = 0
       for i, t in enumerate(todos):
@@ -43,9 +43,6 @@ def before_request():
         dep_perc = (100/i) * total
         text = "Please contact {} he feels like poo".format(current_user.username)
         tHolds = db.session.query(Threshold).filter(Threshold.user_id == current_user.id)
-        f = open("C:/Users/ben.horner/Desktop/Test/MyFile.txt", "w")
-        f.write("thold.friend")
-        f.close
         users = User.query.order_by(User.username)
         Friends = []
         for user in users:

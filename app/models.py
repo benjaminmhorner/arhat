@@ -62,7 +62,7 @@ friends = db.Table('friends',
 def load_user(user_id):
   return User.query.get(int(user_id))
 
-class User(SearchableMixin, db.Model, UserMixin):
+class User( db.Model, UserMixin):
   __searchable__ = ['username']
   id = db.Column(db.Integer, primary_key = True)
   username = db.Column(db.String(20), unique=True, nullable=False)
