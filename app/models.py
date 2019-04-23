@@ -144,18 +144,18 @@ class Threshold(db.Model):
   def __repr__(self):
     return f"Threshold('{self.id}', '{self.user_id}','{self.t_hold}', '{self.friend}')"
 
-class Todo(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  text = db.Column(db.String(200))
-  complete = db.Column(db.Boolean)
-  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-  date_made = db.Column(db.String(200))
-  date_due = db.Column(db.String(200))
+# class Todo(db.Model):
+#   id = db.Column(db.Integer, primary_key=True)
+#   text = db.Column(db.String(200))
+#   complete = db.Column(db.Boolean)
+#   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#   date_made = db.Column(db.String(200))
+#   date_due = db.Column(db.String(200))
 
-  user = db.relationship("User", back_populates="todos")
+#   user = db.relationship("User", back_populates="todos")
 
-  def __repr__(self):
-    return f"Todo('{self.id}', '{self.user_id}','{self.complete}', '{self.text}')"
+#   def __repr__(self):
+#     return f"Todo('{self.id}', '{self.user_id}','{self.complete}', '{self.text}')"
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
